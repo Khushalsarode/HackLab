@@ -20,8 +20,9 @@ model:
 
 
 prompt: |
-  Summarize the following hackathon description in a concise and clear format:
-  {hackathon_description}. Also provide relevance tips and tricks for the hackathon.
+  -Summarize the following hackathon description in a concise and clear format:
+  {hackathon_description}. 
+  - Also provide relevance tips and tricks for the hackathon.
 
 readme: |
   This flow summarizes hackathon descriptions using RAG for enhanced relevance.

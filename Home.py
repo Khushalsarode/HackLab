@@ -4,7 +4,10 @@ import streamlit as st
 st.set_page_config(page_title="Creative Tools for Hackathons", layout="wide")
 
 # Title of the app
+st.title("HackLabs")
+st.title("Ignite Creativity, Generate Ideas, and Build the Future")
 st.title("🎉 Welcome to Creative Tools for Hackathons & Project Ideas 🚀")
+
 
 # Description
 st.write(
