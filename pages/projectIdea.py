@@ -17,7 +17,7 @@ flow = Flow(source="./flows/project-idea-generation-flow.yaml")
 
 # Streamlit App UI
 st.set_page_config(page_title="Project Idea Generator", layout="wide")
-st.title("🚀 Project Idea Generation")
+st.title("🚀 Project Idea Generator")
 
 # Description
 st.write(
@@ -25,7 +25,7 @@ st.write(
     Welcome to the **Project Idea Generator**! 🎯
     
     This app helps you generate unique and innovative project ideas for your hackathon or personal projects.
-    Just provide some details about your industry, preferred technology, and project scale, and we'll suggest tailored ideas for you. 💡
+    Provide details about your industry, preferred technology, and project scale, and we'll suggest tailored ideas for you. 💡
     """
 )
 
@@ -57,10 +57,23 @@ if st.button("💥 Generate Ideas"):
             # Run the flow with user inputs
             response = client.flow.test(flow, input_dict)
             
-            # Display the response if successful
-            st.success("🎉 Project Ideas Generated Successfully!")
-            st.subheader("Suggested Project Ideas 💡")
-            st.markdown(response)
+            # Debugging: Print the response
+            #st.write("Response received from Mira API:")
+            #st.write(response)  # This will display the full response for debugging
             
+            # Process the response
+            if isinstance(response, dict) and "result" in response:
+                st.success("🎉 Project Ideas Generated Successfully!")
+                st.subheader("Suggested Project Ideas 💡")
+                
+                # Parse the 'result' field, which contains the ideas
+                result_text = response["result"]
+                if result_text.strip():
+                    st.write(result_text)
+                else:
+                    st.warning("No project ideas generated. Please try again.")
+            else:
+                st.error("Unexpected response format. Please check the API output.")
+
         except Exception as e:
             st.error(f"❌ An error occurred: {e}")
